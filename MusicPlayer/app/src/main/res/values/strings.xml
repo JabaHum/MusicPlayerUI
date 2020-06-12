@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">MusicPlayer</string>
+    <string name="banana_brain">Banana Brain</string>
+    <string name="die_antword">Die AntWord</string>
 </resources>
