@@ -38,6 +38,12 @@ public class TopTracksRepository {
         final LiveData<Resource<MainModel>> source = LiveDataReactiveStreams.fromPublisher(
                 apIinterface.getTopTracks(Config.toptracks, Config.api_key, Config.format)
                         .toFlowable()
+                        .onErrorReturn(new Function<Throwable, MainModel>() {
+                            @Override
+                            public MainModel apply(Throwable throwable) throws Exception {
+                                return new MainModel();
+                            }
+                        })
                         .map(new Function<MainModel, Resource<MainModel>>() {
                             @Override
                             public Resource<MainModel> apply(MainModel mainModel) throws Exception {
