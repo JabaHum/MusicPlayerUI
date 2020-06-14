@@ -2,14 +2,12 @@ package id.ac.polinema.musicplayer.models;
 
 import com.squareup.moshi.Json;
 
-import org.w3c.dom.Attr;
-
 import java.util.List;
 
-public class TrackData {
+public class Track {
 
     @Json(name = "@attr")
-    private String attr;
+    private Attr attr;
     @Json(name = "duration")
     private String duration;
     @Json(name = "playcount")
@@ -27,15 +25,15 @@ public class TrackData {
     @Json(name = "url")
     private String url;
 
-    public String getAttr() {
+    public Attr getAttr() {
         return attr;
     }
 
-    public void setAttr(String attr) {
+    public void setAttr(Attr attr) {
         this.attr = attr;
     }
 
-    public TrackData withAttr(String attr) {
+    public Track withAttr(Attr attr) {
         this.attr = attr;
         return this;
     }
@@ -48,7 +46,7 @@ public class TrackData {
         this.duration = duration;
     }
 
-    public TrackData withDuration(String duration) {
+    public Track withDuration(String duration) {
         this.duration = duration;
         return this;
     }
@@ -61,7 +59,7 @@ public class TrackData {
         this.playcount = playcount;
     }
 
-    public TrackData withPlaycount(String playcount) {
+    public Track withPlaycount(String playcount) {
         this.playcount = playcount;
         return this;
     }
@@ -74,7 +72,7 @@ public class TrackData {
         this.artist = artist;
     }
 
-    public TrackData withArtist(Artist artist) {
+    public Track withArtist(Artist artist) {
         this.artist = artist;
         return this;
     }
@@ -87,7 +85,7 @@ public class TrackData {
         this.image = image;
     }
 
-    public TrackData withImage(List<Image> image) {
+    public Track withImage(List<Image> image) {
         this.image = image;
         return this;
     }
@@ -100,7 +98,7 @@ public class TrackData {
         this.streamable = streamable;
     }
 
-    public TrackData withStreamable(Streamable streamable) {
+    public Track withStreamable(Streamable streamable) {
         this.streamable = streamable;
         return this;
     }
@@ -113,7 +111,7 @@ public class TrackData {
         this.mbid = mbid;
     }
 
-    public TrackData withMbid(String mbid) {
+    public Track withMbid(String mbid) {
         this.mbid = mbid;
         return this;
     }
@@ -126,7 +124,7 @@ public class TrackData {
         this.name = name;
     }
 
-    public TrackData withName(String name) {
+    public Track withName(String name) {
         this.name = name;
         return this;
     }
@@ -139,7 +137,7 @@ public class TrackData {
         this.url = url;
     }
 
-    public TrackData withUrl(String url) {
+    public Track withUrl(String url) {
         this.url = url;
         return this;
     }

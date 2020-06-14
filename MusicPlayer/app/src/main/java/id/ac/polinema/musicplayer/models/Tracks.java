@@ -9,16 +9,16 @@ public class Tracks {
 
     @SerializedName("track")
     @Expose
-    private List<TrackData> track = null;
+    private List<Track> track = null;
     @SerializedName("@attr")
     @Expose
     private Attr attr;
 
-    public List<TrackData> getTrack() {
+    public List<Track> getTrack() {
         return track;
     }
 
-    public void setTrack(List<TrackData> track) {
+    public void setTrack(List<Track> track) {
         this.track = track;
     }
 

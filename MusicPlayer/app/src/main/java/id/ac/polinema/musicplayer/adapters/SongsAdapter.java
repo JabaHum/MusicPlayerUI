@@ -13,19 +13,19 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 import id.ac.polinema.musicplayer.R;
-import id.ac.polinema.musicplayer.models.TrackData;
+import id.ac.polinema.musicplayer.models.Track;
 
 public class SongsAdapter extends RecyclerView.Adapter<SongsAdapter.ItemViewHolder> {
 
     private Context context;
-    private List<TrackData> dataList;
+    private List<Track> dataList;
 
-    public SongsAdapter(Context context,List<TrackData> dataList) {
+    public SongsAdapter(Context context,List<Track> dataList) {
         this.context = context;
         this.dataList = dataList;
     }
 
-    public void setDataList(List<TrackData> dataList) {
+    public void setDataList(List<Track> dataList) {
         this.dataList = dataList;
     }
 
@@ -41,7 +41,7 @@ public class SongsAdapter extends RecyclerView.Adapter<SongsAdapter.ItemViewHold
 
     @Override
     public void onBindViewHolder(@NonNull ItemViewHolder holder, int position) {
-        TrackData data = dataList.get(position);
+        Track data = dataList.get(position);
 
         holder.txtSong.setText(data.getName());
         holder.txtArtistName.setText(data.getArtist().getName());

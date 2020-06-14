@@ -16,17 +16,17 @@ import id.ac.polinema.musicplayer.R;
 import id.ac.polinema.musicplayer.adapters.SongsAdapter;
 import id.ac.polinema.musicplayer.models.MainModel;
 import id.ac.polinema.musicplayer.models.Resource;
-import id.ac.polinema.musicplayer.models.TopTracksData;
-import id.ac.polinema.musicplayer.models.TrackData;
+import id.ac.polinema.musicplayer.models.Track;
 import id.ac.polinema.musicplayer.viewmodels.TopTracksViewModel;
+import timber.log.Timber;
 
 public class MainActivity extends AppCompatActivity {
-
+    private static final String TAG = "MainActivity";
     TopTracksViewModel viewModel;
     RecyclerView mRecyclerview;
     SongsAdapter mSongsAdapter;
     SwipeRefreshLayout mSwipeRefreshLayout;
-    List<TrackData> data;
+    List<Track> data;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,10 +63,10 @@ public class MainActivity extends AppCompatActivity {
                             break;
                         case SUCCESS:
                             if (mainModelResource.data !=null){
-
+                                Timber.tag(TAG).d("%s",mainModelResource.data);
+                                //data.add((TrackData) (mainModelResource.data != null ? mainModelResource.data.getTracks().getTrack() : null));
+                                mSwipeRefreshLayout.setRefreshing(false);
                             }
-                            //data.add((TrackData) (mainModelResource.data != null ? mainModelResource.data.getTracks().getTrack() : null));
-                            mSwipeRefreshLayout.setRefreshing(false);
                             break;
                     }
                 }

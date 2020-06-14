@@ -2,39 +2,37 @@ package id.ac.polinema.musicplayer.models;
 
 import com.squareup.moshi.Json;
 
-import org.w3c.dom.Attr;
-
 import java.util.List;
 
 public class TopTracksData {
 
     @Json(name = "@attr")
-    private String attr;
+    private Attr attr;
     @Json(name = "track")
-    private List<TrackData> track = null;
+    private List<Track> track = null;
 
-    public String getAttr() {
+    public Attr getAttr() {
         return attr;
     }
 
-    public void setAttr(String attr) {
+    public void setAttr(Attr attr) {
         this.attr = attr;
     }
 
-    public TopTracksData withAttr(String attr) {
+    public TopTracksData withAttr(Attr attr) {
         this.attr = attr;
         return this;
     }
 
-    public List<TrackData> getTrack() {
+    public List<Track> getTrack() {
         return track;
     }
 
-    public void setTrack(List<TrackData> track) {
+    public void setTrack(List<Track> track) {
         this.track = track;
     }
 
-    public TopTracksData withTrack(List<TrackData> track) {
+    public TopTracksData withTrack(List<Track> track) {
         this.track = track;
         return this;
     }
