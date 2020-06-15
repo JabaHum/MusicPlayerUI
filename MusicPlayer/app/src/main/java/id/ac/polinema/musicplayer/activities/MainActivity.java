@@ -63,8 +63,7 @@ public class MainActivity extends AppCompatActivity {
                             break;
                         case SUCCESS:
                             if (mainModelResource.data !=null){
-                                Timber.tag(TAG).d("%s",mainModelResource.data);
-                                //data.add((TrackData) (mainModelResource.data != null ? mainModelResource.data.getTracks().getTrack() : null));
+                                Timber.tag(TAG).d("mainModelResource%s", mainModelResource.data);
                                 mSwipeRefreshLayout.setRefreshing(false);
                             }
                             break;
