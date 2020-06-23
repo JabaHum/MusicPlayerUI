@@ -19,7 +19,7 @@ import id.ac.polinema.musicplayer.models.Track;
 public class SongsAdapter extends RecyclerView.Adapter<SongsAdapter.ItemViewHolder> {
 
     private List<Track> dataList = new ArrayList<>();
-    private final OnItemClickListener listener;
+    private  OnItemClickListener listener;
 
     public SongsAdapter(OnItemClickListener listener) {
         this.listener = listener;
@@ -52,7 +52,7 @@ public class SongsAdapter extends RecyclerView.Adapter<SongsAdapter.ItemViewHold
         return dataList.size();
     }
 
-    public static class ItemViewHolder extends RecyclerView.ViewHolder {
+    public  class ItemViewHolder extends RecyclerView.ViewHolder {
 
         ImageView ivThumbnail;
         TextView txtArtistName, txtSong;
@@ -69,9 +69,16 @@ public class SongsAdapter extends RecyclerView.Adapter<SongsAdapter.ItemViewHold
 
         }
 
-        public void bind(Track track) {
+        public void bind(final Track track) {
             txtSong.setText(track.getName());
             txtArtistName.setText(track.getArtist().getName());
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    listener.onClick(track);
+                }
+            });
         }
 
     }

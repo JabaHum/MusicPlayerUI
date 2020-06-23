@@ -1,7 +1,8 @@
 package id.ac.polinema.musicplayer.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
+import android.os.Parcelable;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
@@ -25,6 +26,7 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
     RecyclerView mRecyclerview;
     SongsAdapter mSongsAdapter;
     SwipeRefreshLayout mSwipeRefreshLayout;
+
 
 
     @Override
@@ -75,6 +77,8 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
 
     @Override
     public void onClick(Track track) {
-
+        Intent intent = new Intent(MainActivity.this, SelectedSong.class);
+        intent.putExtra("Data", track.toString());
+        startActivity(intent);
     }
 }
