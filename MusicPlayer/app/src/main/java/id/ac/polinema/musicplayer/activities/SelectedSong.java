@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,8 +18,7 @@ public class SelectedSong extends AppCompatActivity {
     private static final String TAG = "SelectedSong";
 
     TextView txtSongTitle, txtSongArtist;
-    ImageView btnPlayPause;
-    ImageView btnPause;
+    public static ImageView btnPlayPause;
     ImageView btnForward;
     ImageView btnRewind;
 
@@ -41,12 +39,12 @@ public class SelectedSong extends AppCompatActivity {
         btnForward = findViewById(R.id.btn_forward);
         btnRewind = findViewById(R.id.btn_rewindd);
 
-        String jsonMyObject = null;
+        String data = null;
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
-            jsonMyObject = extras.getString("Data");
+            data = extras.getString("Data");
         }
-        Track track = new Gson().fromJson(jsonMyObject, Track.class);
+        Track track = new Gson().fromJson(data, Track.class);
 
         txtSongTitle.setText(track.getName());
         txtSongArtist.setText(track.getArtist().getName());
@@ -65,9 +63,11 @@ public class SelectedSong extends AppCompatActivity {
         });
     }
 
-    public void flipPlayPause(boolean isPlaying) {
+    public static void flipPlayPause(boolean isPlaying) {
         if (isPlaying){
             btnPlayPause.setImageResource(android.R.drawable.ic_media_pause);
+        }else {
+            btnPlayPause.setImageResource(R.drawable.play_button);
         }
     }
 }

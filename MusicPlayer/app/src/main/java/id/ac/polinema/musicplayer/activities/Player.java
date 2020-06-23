@@ -39,7 +39,13 @@ public class Player {
             mMediaplayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
                 @Override
                 public void onPrepared(MediaPlayer mediaPlayer) {
-                    mMediaplayer.start();
+                    playPlayer();
+                }
+            });
+            mMediaplayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                @Override
+                public void onCompletion(MediaPlayer mediaPlayer) {
+                    SelectedSong.flipPlayPause(false);
                 }
             });
             mMediaplayer.prepareAsync();
@@ -53,6 +59,7 @@ public class Player {
     public void pausePlayer() {
         try {
             mMediaplayer.pause();
+            SelectedSong.flipPlayPause(false);
             Toast.makeText(mContext, "Paused", Toast.LENGTH_SHORT).show();
         } catch (Exception e) {
             Timber.tag(TAG).e("pausePlayer: %s", e.toString());
@@ -62,6 +69,7 @@ public class Player {
     public void playPlayer() {
         try {
             mMediaplayer.start();
+            SelectedSong.flipPlayPause(true);
             Toast.makeText(mContext, "Play", Toast.LENGTH_SHORT).show();
         } catch (Exception e) {
             Timber.tag(TAG).e("pausePlayer: %s", e.toString());
