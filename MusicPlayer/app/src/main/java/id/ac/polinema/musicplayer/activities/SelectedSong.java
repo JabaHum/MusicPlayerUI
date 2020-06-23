@@ -1,12 +1,17 @@
 package id.ac.polinema.musicplayer.activities;
 
+import android.media.AudioManager;
+import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.gson.Gson;
+
+import java.io.IOException;
 
 import id.ac.polinema.musicplayer.R;
 import id.ac.polinema.musicplayer.models.Track;
@@ -16,6 +21,9 @@ public class SelectedSong extends AppCompatActivity {
     private static final String TAG = "SelectedSong";
 
     TextView txtSongTitle, txtSongArtist;
+
+    MediaPlayer mMediaPlayer;
+    AudioManager mAudioManger;
 
     public SelectedSong() {
     }
@@ -37,6 +45,18 @@ public class SelectedSong extends AppCompatActivity {
 
         txtSongTitle.setText(myObject.getName());
         txtSongArtist.setText(myObject.getArtist().getName());
+
+
+         mMediaPlayer = new MediaPlayer();
+         mMediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
+
+         try{
+             mMediaPlayer.setDataSource(myObject.getUrl());
+             mMediaPlayer.prepare();
+             mMediaPlayer.start();
+         }catch (IOException e){
+             Log.e(TAG, "onCreate: "+e.toString() );
+         }
 
     }
 }
