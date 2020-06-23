@@ -1,7 +1,9 @@
 package id.ac.polinema.musicplayer.activities;
 
+import android.content.Context;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
+import android.widget.Toast;
 
 import java.io.IOException;
 
@@ -12,9 +14,11 @@ public class Player {
     private MediaPlayer mMediaplayer = new MediaPlayer();
     public static Player mPlayer;
     private String url = "";
+    private Context mContext;
 
-    Player() {
+    Player(Context mContext) {
         this.mPlayer = this;
+        this.mContext = mContext;
     }
 
     public void playStream(String Url) {
@@ -49,6 +53,7 @@ public class Player {
     public void pausePlayer() {
         try {
             mMediaplayer.pause();
+            Toast.makeText(mContext, "Paused", Toast.LENGTH_SHORT).show();
         } catch (Exception e) {
             Timber.tag(TAG).e("pausePlayer: %s", e.toString());
         }
@@ -57,6 +62,7 @@ public class Player {
     public void playPlayer() {
         try {
             mMediaplayer.start();
+            Toast.makeText(mContext, "Play", Toast.LENGTH_SHORT).show();
         } catch (Exception e) {
             Timber.tag(TAG).e("pausePlayer: %s", e.toString());
         }

@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -40,14 +41,6 @@ public class SelectedSong extends AppCompatActivity {
         btnForward = findViewById(R.id.btn_forward);
         btnRewind = findViewById(R.id.btn_rewindd);
 
-
-        btnPlayPause.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });
-
         String jsonMyObject = null;
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
@@ -58,9 +51,18 @@ public class SelectedSong extends AppCompatActivity {
         txtSongTitle.setText(track.getName());
         txtSongArtist.setText(track.getArtist().getName());
         if(Player.mPlayer == null){
-            new Player();
+            new Player(this);
         }
         Player.mPlayer.playStream(track.getUrl());
+
+
+        btnPlayPause.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Player.mPlayer.togglePlayer();
+
+            }
+        });
     }
 
     public void flipPlayPause(boolean isPlaying) {
