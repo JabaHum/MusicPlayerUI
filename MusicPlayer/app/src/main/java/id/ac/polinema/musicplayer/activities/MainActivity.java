@@ -9,14 +9,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import id.ac.polinema.musicplayer.R;
 import id.ac.polinema.musicplayer.adapters.SongsAdapter;
 import id.ac.polinema.musicplayer.models.MainModel;
 import id.ac.polinema.musicplayer.models.Resource;
-import id.ac.polinema.musicplayer.models.Track;
 import id.ac.polinema.musicplayer.viewmodels.TopTracksViewModel;
 import timber.log.Timber;
 
@@ -26,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
     RecyclerView mRecyclerview;
     SongsAdapter mSongsAdapter;
     SwipeRefreshLayout mSwipeRefreshLayout;
-    List<Track> data;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,10 +31,9 @@ public class MainActivity extends AppCompatActivity {
 
         mRecyclerview = findViewById(R.id.radio_recycler_view);
         mSwipeRefreshLayout = findViewById(R.id.refresh);
-        data = new ArrayList<>();
-        
-        
-        mSongsAdapter = new SongsAdapter(MainActivity.this,data);
+
+        mSongsAdapter = new SongsAdapter();
+
         mRecyclerview.setHasFixedSize(false);
         mRecyclerview.setLayoutManager(new LinearLayoutManager(MainActivity.this,RecyclerView.VERTICAL,false));
         mRecyclerview.setAdapter(mSongsAdapter);
@@ -64,6 +59,7 @@ public class MainActivity extends AppCompatActivity {
                         case SUCCESS:
                             if (mainModelResource.data !=null){
                                 Timber.tag(TAG).d("mainModelResource%s", mainModelResource.data);
+                                mSongsAdapter.setDataList(mainModelResource.data.getTracks().getTrack());
                                 mSwipeRefreshLayout.setRefreshing(false);
                             }
                             break;

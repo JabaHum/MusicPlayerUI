@@ -1,6 +1,5 @@
 package id.ac.polinema.musicplayer.adapters;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +9,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import id.ac.polinema.musicplayer.R;
@@ -17,22 +17,18 @@ import id.ac.polinema.musicplayer.models.Track;
 
 public class SongsAdapter extends RecyclerView.Adapter<SongsAdapter.ItemViewHolder> {
 
-    private Context context;
-    private List<Track> dataList;
+    private List<Track> dataList = new ArrayList<>();
 
-    public SongsAdapter(Context context,List<Track> dataList) {
-        this.context = context;
-        this.dataList = dataList;
-    }
 
     public void setDataList(List<Track> dataList) {
         this.dataList = dataList;
+        notifyDataSetChanged();
     }
 
     @NonNull
     @Override
     public ItemViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        LayoutInflater layoutInflater = LayoutInflater.from(context);
+        LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
 
         View view = layoutInflater.inflate(R.layout.song_item, parent, false);
 
@@ -41,10 +37,8 @@ public class SongsAdapter extends RecyclerView.Adapter<SongsAdapter.ItemViewHold
 
     @Override
     public void onBindViewHolder(@NonNull ItemViewHolder holder, int position) {
-        Track data = dataList.get(position);
+        ((ItemViewHolder) holder).bind(dataList.get(position));
 
-        holder.txtSong.setText(data.getName());
-        holder.txtArtistName.setText(data.getArtist().getName());
 
     }
 
@@ -67,5 +61,11 @@ public class SongsAdapter extends RecyclerView.Adapter<SongsAdapter.ItemViewHold
             txtSong = itemView.findViewById(R.id.song_name);
 
         }
+
+        public void bind(Track track) {
+            txtSong.setText(track.getName());
+            txtArtistName.setText(track.getArtist().getName());
+        }
+
     }
 }
