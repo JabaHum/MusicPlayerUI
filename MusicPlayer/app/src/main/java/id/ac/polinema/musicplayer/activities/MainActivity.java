@@ -1,6 +1,7 @@
 package id.ac.polinema.musicplayer.activities;
 
 import android.os.Bundle;
+import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
@@ -11,12 +12,14 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import id.ac.polinema.musicplayer.R;
 import id.ac.polinema.musicplayer.adapters.SongsAdapter;
+import id.ac.polinema.musicplayer.common.OnItemClickListener;
 import id.ac.polinema.musicplayer.models.MainModel;
 import id.ac.polinema.musicplayer.models.Resource;
+import id.ac.polinema.musicplayer.models.Track;
 import id.ac.polinema.musicplayer.viewmodels.TopTracksViewModel;
 import timber.log.Timber;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements OnItemClickListener {
     private static final String TAG = "MainActivity";
     TopTracksViewModel viewModel;
     RecyclerView mRecyclerview;
@@ -32,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
         mRecyclerview = findViewById(R.id.radio_recycler_view);
         mSwipeRefreshLayout = findViewById(R.id.refresh);
 
-        mSongsAdapter = new SongsAdapter();
+        mSongsAdapter = new SongsAdapter(this);
 
         mRecyclerview.setHasFixedSize(false);
         mRecyclerview.setLayoutManager(new LinearLayoutManager(MainActivity.this,RecyclerView.VERTICAL,false));
@@ -67,5 +70,11 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+
+    @Override
+    public void onClick(Track track) {
+
     }
 }
