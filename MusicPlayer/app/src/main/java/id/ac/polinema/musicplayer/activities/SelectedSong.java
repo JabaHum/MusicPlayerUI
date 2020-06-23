@@ -1,6 +1,8 @@
 package id.ac.polinema.musicplayer.activities;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -16,6 +18,10 @@ public class SelectedSong extends AppCompatActivity {
     private static final String TAG = "SelectedSong";
 
     TextView txtSongTitle, txtSongArtist;
+    ImageView btnPlayPause;
+    ImageView btnPause;
+    ImageView btnForward;
+    ImageView btnRewind;
 
     public SelectedSong() {
     }
@@ -25,8 +31,22 @@ public class SelectedSong extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.selected_song_item);
 
+        //TextViews
         txtSongTitle = findViewById(R.id.txt_song_title);
         txtSongArtist = findViewById(R.id.txt_song_artist);
+
+        //Buttons
+        btnPlayPause = findViewById(R.id.btn_play);
+        btnForward = findViewById(R.id.btn_forward);
+        btnRewind = findViewById(R.id.btn_rewindd);
+
+
+        btnPlayPause.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
 
         String jsonMyObject = null;
         Bundle extras = getIntent().getExtras();
@@ -41,5 +61,11 @@ public class SelectedSong extends AppCompatActivity {
             new Player();
         }
         Player.mPlayer.playStream(track.getUrl());
+    }
+
+    public void flipPlayPause(boolean isPlaying) {
+        if (isPlaying){
+            btnPlayPause.setImageResource(android.R.drawable.ic_media_pause);
+        }
     }
 }

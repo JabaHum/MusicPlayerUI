@@ -45,4 +45,33 @@ public class Player {
         }
     }
 
+
+    public void pausePlayer() {
+        try {
+            mMediaplayer.pause();
+        } catch (Exception e) {
+            Timber.tag(TAG).e("pausePlayer: %s", e.toString());
+        }
+    }
+
+    public void playPlayer() {
+        try {
+            mMediaplayer.start();
+        } catch (Exception e) {
+            Timber.tag(TAG).e("pausePlayer: %s", e.toString());
+        }
+    }
+
+
+    public void togglePlayer() {
+        try {
+            if (mMediaplayer.isPlaying()) {
+                pausePlayer();
+            } else {
+                playPlayer();
+            }
+        } catch (Exception e) {
+            Timber.tag(TAG).e("togglePlayer: %s", e.toString());
+        }
+    }
 }
