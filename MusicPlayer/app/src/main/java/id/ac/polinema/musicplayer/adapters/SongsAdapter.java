@@ -9,6 +9,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -65,6 +68,15 @@ public class SongsAdapter extends RecyclerView.Adapter<SongsAdapter.ItemViewHold
         public void bind(Track track) {
             txtSong.setText(track.getName());
             txtArtistName.setText(track.getArtist().getName());
+            //loadImage(ivThumbnail,track.getUrl());
+
+        }
+
+
+        public static void loadImage(ImageView view, String imageUrl) {
+            Glide.with(view.getContext())
+                    .load(imageUrl).apply(new RequestOptions().circleCrop())
+                    .into(view);
         }
 
     }
