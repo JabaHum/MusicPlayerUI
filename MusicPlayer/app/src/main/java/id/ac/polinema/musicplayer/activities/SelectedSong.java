@@ -1,8 +1,6 @@
 package id.ac.polinema.musicplayer.activities;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -10,18 +8,17 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.gson.Gson;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import id.ac.polinema.musicplayer.R;
 import id.ac.polinema.musicplayer.models.Track;
-import timber.log.Timber;
 
 public class SelectedSong extends AppCompatActivity {
 
     private static final String TAG = "SelectedSong";
 
-    TextView txtSongTitle;
+    TextView txtSongTitle, txtSongArtist;
+
+    public SelectedSong() {
+    }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -29,28 +26,17 @@ public class SelectedSong extends AppCompatActivity {
         setContentView(R.layout.selected_song_item);
 
         txtSongTitle = findViewById(R.id.txt_song_title);
+        txtSongArtist = findViewById(R.id.txt_song_artist);
 
-
-        Intent i = getIntent();
-        String data = i.getStringExtra("Data");
-        JSONObject jsonObject = null;
-
-        try {
-            if (data != null) {
-                 jsonObject = new JSONObject(data);
-
-                Timber.tag(TAG).d("%s", data);
-
-                Gson gson = new Gson();
-                Track track = gson.fromJson(String.valueOf(jsonObject), Track.class);
-
-                txtSongTitle.setText(track.getName());
-            }
-        } catch (JSONException e) {
-            Log.e(TAG, "onCreate: "+e.toString() );
+        String jsonMyObject = null;
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            jsonMyObject = extras.getString("Data");
         }
+        Track myObject = new Gson().fromJson(jsonMyObject, Track.class);
 
-
+        txtSongTitle.setText(myObject.getName());
+        txtSongArtist.setText(myObject.getArtist().getName());
 
     }
 }

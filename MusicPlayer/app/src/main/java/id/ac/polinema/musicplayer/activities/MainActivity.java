@@ -11,6 +11,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import com.google.gson.Gson;
+
 import id.ac.polinema.musicplayer.R;
 import id.ac.polinema.musicplayer.adapters.SongsAdapter;
 import id.ac.polinema.musicplayer.common.OnItemClickListener;
@@ -78,7 +80,7 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
     @Override
     public void onClick(Track track) {
         Intent intent = new Intent(MainActivity.this, SelectedSong.class);
-        intent.putExtra("Data", track.toString());
+        intent.putExtra("Data",new Gson().toJson(track));
         startActivity(intent);
     }
 }

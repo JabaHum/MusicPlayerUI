@@ -11,6 +11,7 @@ public class TopTracksData {
     @Json(name = "track")
     private List<Track> track = null;
 
+
     public Attr getAttr() {
         return attr;
     }
@@ -36,5 +37,6 @@ public class TopTracksData {
         this.track = track;
         return this;
     }
+
 
 }

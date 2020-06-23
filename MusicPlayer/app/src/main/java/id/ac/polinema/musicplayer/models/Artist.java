@@ -2,6 +2,7 @@ package id.ac.polinema.musicplayer.models;
 
 import com.squareup.moshi.Json;
 
+
 public class Artist {
 
     @Json(name = "url")

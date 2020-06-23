@@ -9,6 +9,7 @@ public class Image {
     @Json(name = "#text")
     private String text;
 
+
     public String getSize() {
         return size;
     }
@@ -34,5 +35,6 @@ public class Image {
         this.text = text;
         return this;
     }
+
 
 }

@@ -9,6 +9,7 @@ public class MainModel {
     @Expose
     private Tracks tracks;
 
+
     public Tracks getTracks() {
         return tracks;
     }
@@ -16,5 +17,6 @@ public class MainModel {
     public void setTracks(Tracks tracks) {
         this.tracks = tracks;
     }
+
 
 }

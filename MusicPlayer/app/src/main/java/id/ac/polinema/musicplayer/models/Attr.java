@@ -18,6 +18,7 @@ public class Attr {
     @Expose
     private String total;
 
+
     public String getPage() {
         return page;
     }
@@ -49,5 +50,6 @@ public class Attr {
     public void setTotal(String total) {
         this.total = total;
     }
+
 
 }

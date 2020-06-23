@@ -9,6 +9,7 @@ public class Streamable {
     @Json(name = "#text")
     private String text;
 
+
     public String getFulltrack() {
         return fulltrack;
     }
@@ -34,5 +35,6 @@ public class Streamable {
         this.text = text;
         return this;
     }
+
 
 }

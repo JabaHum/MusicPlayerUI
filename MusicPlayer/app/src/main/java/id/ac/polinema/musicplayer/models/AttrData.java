@@ -16,6 +16,7 @@ public class AttrData {
     @Json(name = "totalPages")
     private String totalPages;
 
+
     public String getPage() {
         return page;
     }
