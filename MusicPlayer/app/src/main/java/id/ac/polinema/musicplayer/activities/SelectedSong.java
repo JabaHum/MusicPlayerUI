@@ -41,22 +41,13 @@ public class SelectedSong extends AppCompatActivity {
         if (extras != null) {
             jsonMyObject = extras.getString("Data");
         }
-        Track myObject = new Gson().fromJson(jsonMyObject, Track.class);
+        Track track = new Gson().fromJson(jsonMyObject, Track.class);
 
-        txtSongTitle.setText(myObject.getName());
-        txtSongArtist.setText(myObject.getArtist().getName());
-
-
-         mMediaPlayer = new MediaPlayer();
-         mMediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
-
-         try{
-             mMediaPlayer.setDataSource(myObject.getUrl());
-             mMediaPlayer.prepare();
-             mMediaPlayer.start();
-         }catch (IOException e){
-             Log.e(TAG, "onCreate: "+e.toString() );
-         }
-
+        txtSongTitle.setText(track.getName());
+        txtSongArtist.setText(track.getArtist().getName());
+        if(Player.mPlayer == null){
+            new Player();
+        }
+        Player.mPlayer.playStream(track.getUrl());
     }
 }
