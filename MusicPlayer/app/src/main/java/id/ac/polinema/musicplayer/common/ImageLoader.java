@@ -42,7 +42,6 @@ public class ImageLoader {
                     public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Bitmap> target, boolean isFirstResource) {
 
                         if (callbacks != null) {
-
                             callbacks.onFail(e);
                         }
 

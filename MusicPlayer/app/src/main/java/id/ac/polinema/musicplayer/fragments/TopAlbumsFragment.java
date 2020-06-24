@@ -19,8 +19,7 @@ public class TopAlbumsFragment extends Fragment {
 
     TopAlbumsViewModel viewModel;
     RecyclerView mRecyclerview;
-    TopAlbumsAdapter mSongsAdapter;
-    SwipeRefreshLayout mSwipeRefreshLayout;
+    TopAlbumsAdapter mTopAlbumsAdapter;
 
     public TopAlbumsFragment() {
     }
