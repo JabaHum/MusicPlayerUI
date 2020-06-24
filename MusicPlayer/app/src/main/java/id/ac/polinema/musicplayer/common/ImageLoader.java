@@ -14,6 +14,9 @@ import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 
 import java.lang.ref.WeakReference;
+import java.util.List;
+
+import id.ac.polinema.musicplayer.models.Image;
 
 /**
  * Helper class that is used to load images
@@ -21,11 +24,11 @@ import java.lang.ref.WeakReference;
  */
 
 public class ImageLoader {
-    public static void loadImage(Context context, String imageUrl, int placeHolderResourceID, ImageView imageView) {
+    public static void loadImage(Context context, List<Image> imageUrl, int placeHolderResourceID, ImageView imageView) {
         WeakReference<Context> weakReference = new WeakReference<>(context);
         Glide.with(weakReference.get())
                 .asBitmap()
-                .load(imageUrl)
+                .load(imageUrl.get(1))
                 .placeholder(placeHolderResourceID)
                 .into(imageView);
     }

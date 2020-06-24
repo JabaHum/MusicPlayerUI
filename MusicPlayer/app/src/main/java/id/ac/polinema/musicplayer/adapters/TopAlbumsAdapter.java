@@ -35,7 +35,7 @@ public class TopAlbumsAdapter extends RecyclerView.Adapter<TopAlbumsAdapter.View
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         Album item = mDataset.get(position);
-        ImageLoader.loadImage(mContext, item.getImageUrl(), R.drawable.default_album, holder.albumImageView);
+        ImageLoader.loadImage(mContext, item.getImage(), R.drawable.default_album, holder.albumImageView);
         holder.nameTextView.setText(item.getName());
         holder.playCountTextView.setText(item.getPlaycount());
         holder.artistTextView.setText(item.getArtist().getName());

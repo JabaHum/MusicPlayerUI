@@ -35,7 +35,7 @@ public class TopArtistsAdapter extends RecyclerView.Adapter<TopArtistsAdapter.Vi
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         ArtistMainData item = mDataset.get(position);
-        ImageLoader.loadImage(mContext, item.getUrl(), R.drawable.default_artist, holder.artistImageView);
+        ImageLoader.loadImage(mContext, item.getImage(), R.drawable.default_artist, holder.artistImageView);
         holder.artistTextView.setText(item.getName());
         holder.numberOfPlaysTextView.setText(item.getPlaycount());
     }

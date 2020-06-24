@@ -37,7 +37,7 @@ public class TopTracksAdapter extends RecyclerView.Adapter<TopTracksAdapter.View
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         Track item = mDataset.get(position);
-        ImageLoader.loadImage(mContext, item.getUrl(), R.drawable.default_track, holder.trackImageView);
+        ImageLoader.loadImage(mContext, item.getImage(), R.drawable.default_track, holder.trackImageView);
         holder.nameTextView.setText(item.getName());
         holder.artistTextView.setText(item.getArtist().getName());
         holder.playCountTextView.setText(item.getPlaycount());
