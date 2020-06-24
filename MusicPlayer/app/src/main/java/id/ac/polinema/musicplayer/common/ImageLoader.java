@@ -28,7 +28,7 @@ public class ImageLoader {
         WeakReference<Context> weakReference = new WeakReference<>(context);
         Glide.with(weakReference.get())
                 .asBitmap()
-                .load(imageUrl.get(1))
+                .load(imageUrl.get(0).getText())
                 .placeholder(placeHolderResourceID)
                 .into(imageView);
     }

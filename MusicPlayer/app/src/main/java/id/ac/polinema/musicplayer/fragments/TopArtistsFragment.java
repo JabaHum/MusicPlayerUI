@@ -1,6 +1,9 @@
 package id.ac.polinema.musicplayer.fragments;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,17 +16,17 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import id.ac.polinema.musicplayer.R;
 import id.ac.polinema.musicplayer.adapters.TopArtistsAdapter;
+import id.ac.polinema.musicplayer.interfaces.OnArtistItemClickListener;
+import id.ac.polinema.musicplayer.models.ArtistMainData;
 import id.ac.polinema.musicplayer.models.ArtistMainModel;
 import id.ac.polinema.musicplayer.models.Resource;
 import id.ac.polinema.musicplayer.viewmodels.TopArtistsViewModel;
-import timber.log.Timber;
 
 
-public class TopArtistsFragment extends Fragment implements View.OnClickListener {
+public class TopArtistsFragment extends Fragment implements OnArtistItemClickListener {
 
     private static final String TAG = "TopArtistsFragment";
 
@@ -56,7 +59,7 @@ public class TopArtistsFragment extends Fragment implements View.OnClickListener
     }
 
     private void initRecyclerView() {
-        mTopArtistsAdapter = new TopArtistsAdapter(getContext());
+        mTopArtistsAdapter = new TopArtistsAdapter(getContext(), this);
 
         mRecyclerview.setHasFixedSize(false);
         mRecyclerview.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.VERTICAL,false));
@@ -80,7 +83,6 @@ public class TopArtistsFragment extends Fragment implements View.OnClickListener
                             break;
                         case SUCCESS:
                             if (artistMainModelResource.data != null) {
-                                Timber.tag(TAG).d("mainModelResource%s", artistMainModelResource.data);
                                 mTopArtistsAdapter.setDataset(artistMainModelResource.data.getArtists().getArtist());
                                 mainprogressBar.setVisibility(View.GONE);
 
@@ -92,8 +94,22 @@ public class TopArtistsFragment extends Fragment implements View.OnClickListener
         });
     }
 
-    @Override
-    public void onClick(View view) {
 
+    void openUrl(String url) {
+        if (!TextUtils.isEmpty(url)) {
+            Intent intent = new Intent();
+            intent.setAction(Intent.ACTION_VIEW);
+            intent.setData(Uri.parse(url));
+            if (intent.resolveActivity(requireActivity().getPackageManager()) != null) {
+                startActivity(intent);
+            }
+        }
+    }
+
+
+
+    @Override
+    public void onClick(ArtistMainData artistMainData) {
+        openUrl(artistMainData.getUrl());
     }
 }

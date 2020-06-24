@@ -1,6 +1,9 @@
 package id.ac.polinema.musicplayer.fragments;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,14 +19,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import id.ac.polinema.musicplayer.R;
 import id.ac.polinema.musicplayer.adapters.TopTracksAdapter;
+import id.ac.polinema.musicplayer.interfaces.OnTrackItemClickListener;
 import id.ac.polinema.musicplayer.models.MainModel;
 import id.ac.polinema.musicplayer.models.Resource;
+import id.ac.polinema.musicplayer.models.Track;
 import id.ac.polinema.musicplayer.viewmodels.TopTracksViewModel;
-import timber.log.Timber;
 
-import static androidx.constraintlayout.widget.Constraints.TAG;
-
-public class TopTracksFragment extends Fragment implements View.OnClickListener {
+public class TopTracksFragment extends Fragment implements OnTrackItemClickListener {
 
     private TopTracksViewModel viewModel;
     private ProgressBar mainprogressBar;
@@ -53,7 +55,7 @@ public class TopTracksFragment extends Fragment implements View.OnClickListener 
     }
 
     private void initRecyclerView() {
-        mTracksAdapater = new TopTracksAdapter(getContext());
+        mTracksAdapater = new TopTracksAdapter(getContext(), this);
         mRecyclerview.setHasFixedSize(false);
         mRecyclerview.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.VERTICAL,false));
         mRecyclerview.setAdapter(mTracksAdapater);
@@ -77,7 +79,6 @@ public class TopTracksFragment extends Fragment implements View.OnClickListener 
                             break;
                         case SUCCESS:
                             if (mainModelResource.data != null) {
-                                Timber.tag(TAG).d("mainModelResource%s", mainModelResource.data);
                                 mTracksAdapater.setDataset(mainModelResource.data.getTracks().getTrack());
                                 mainprogressBar.setVisibility(View.GONE);
 
@@ -89,8 +90,20 @@ public class TopTracksFragment extends Fragment implements View.OnClickListener 
         });
     }
 
-    @Override
-    public void onClick(View view) {
 
+    void openUrl(String url) {
+        if (!TextUtils.isEmpty(url)) {
+            Intent intent = new Intent();
+            intent.setAction(Intent.ACTION_VIEW);
+            intent.setData(Uri.parse(url));
+            if (intent.resolveActivity(requireActivity().getPackageManager()) != null) {
+                startActivity(intent);
+            }
+        }
+    }
+
+    @Override
+    public void onClick(Track track) {
+        openUrl(track.getUrl());
     }
 }

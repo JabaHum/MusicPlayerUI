@@ -7,7 +7,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -15,15 +14,18 @@ import java.util.List;
 
 import id.ac.polinema.musicplayer.R;
 import id.ac.polinema.musicplayer.common.ImageLoader;
+import id.ac.polinema.musicplayer.interfaces.OnArtistItemClickListener;
 import id.ac.polinema.musicplayer.models.ArtistMainData;
 
 
 public class TopArtistsAdapter extends RecyclerView.Adapter<TopArtistsAdapter.ViewHolder> {
     private List<ArtistMainData> mDataset = new ArrayList<>();
     private Context mContext;
+    private OnArtistItemClickListener listener;
 
-    public TopArtistsAdapter( Context context) {
+    public TopArtistsAdapter(Context context, OnArtistItemClickListener listener) {
         this.mContext = context;
+        this.listener = listener;
     }
 
     @Override
@@ -34,10 +36,9 @@ public class TopArtistsAdapter extends RecyclerView.Adapter<TopArtistsAdapter.Vi
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        ArtistMainData item = mDataset.get(position);
-        ImageLoader.loadImage(mContext, item.getImage(), R.drawable.default_artist, holder.artistImageView);
-        holder.artistTextView.setText(item.getName());
-        holder.numberOfPlaysTextView.setText(item.getPlaycount());
+
+        ((ViewHolder) holder).bind(mDataset.get(position));
+
     }
 
     @Override
@@ -69,18 +70,24 @@ public class TopArtistsAdapter extends RecyclerView.Adapter<TopArtistsAdapter.Vi
         ImageView artistImageView;
         TextView artistTextView;
         TextView numberOfPlaysTextView;
-        CardView cardView;
 
         public ViewHolder(View itemView) {
             super(itemView);
             artistImageView = itemView.findViewById(R.id.img_artist);
             artistTextView = itemView.findViewById(R.id.txt_artist_name);
             numberOfPlaysTextView = itemView.findViewById(R.id.txt_plays);
-            cardView = itemView.findViewById(R.id.cv_artist_item);
-            cardView.setOnClickListener(new View.OnClickListener() {
+        }
+
+
+        public void bind(final ArtistMainData artistMainData) {
+            ImageLoader.loadImage(mContext, artistMainData.getImage(), R.drawable.default_artist, artistImageView);
+            artistTextView.setText(artistMainData.getName());
+            numberOfPlaysTextView.setText(artistMainData.getPlaycount());
+
+            itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-
+                    listener.onClick(artistMainData);
                 }
             });
         }

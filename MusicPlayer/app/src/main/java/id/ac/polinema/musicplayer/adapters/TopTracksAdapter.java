@@ -16,6 +16,7 @@ import java.util.List;
 import id.ac.polinema.musicplayer.R;
 import id.ac.polinema.musicplayer.common.DurationConverter;
 import id.ac.polinema.musicplayer.common.ImageLoader;
+import id.ac.polinema.musicplayer.interfaces.OnTrackItemClickListener;
 import id.ac.polinema.musicplayer.models.Track;
 
 
@@ -23,9 +24,11 @@ import id.ac.polinema.musicplayer.models.Track;
 public class TopTracksAdapter extends RecyclerView.Adapter<TopTracksAdapter.ViewHolder> {
     private List<Track> mDataset = new ArrayList<>();
     private Context mContext;
+    private OnTrackItemClickListener listener;
 
-    public TopTracksAdapter( Context context) {
+    public TopTracksAdapter(Context context, OnTrackItemClickListener listener) {
         this.mContext = context;
+        this.listener = listener;
     }
 
     @Override
@@ -36,12 +39,7 @@ public class TopTracksAdapter extends RecyclerView.Adapter<TopTracksAdapter.View
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        Track item = mDataset.get(position);
-        ImageLoader.loadImage(mContext, item.getImage(), R.drawable.default_track, holder.trackImageView);
-        holder.nameTextView.setText(item.getName());
-        holder.artistTextView.setText(item.getArtist().getName());
-        holder.playCountTextView.setText(item.getPlaycount());
-        holder.durationTextView.setText(DurationConverter.getDurationInMinutesText(Long.parseLong(item.getDuration())));
+        ((ViewHolder) holder).bind(mDataset.get(position));
     }
 
     @Override
@@ -79,20 +77,29 @@ public class TopTracksAdapter extends RecyclerView.Adapter<TopTracksAdapter.View
         public ViewHolder(View itemView) {
             super(itemView);
 
-
             trackImageView = itemView.findViewById(R.id.img_track);
             nameTextView = itemView.findViewById(R.id.txt_track_name);
             playCountTextView = itemView.findViewById(R.id.txt_plays);
             artistTextView = itemView.findViewById(R.id.txt_track_artist);
             durationTextView = itemView.findViewById(R.id.txt_duration);
-            cardView= itemView.findViewById(R.id.cv_track_item);
-            cardView.setOnClickListener(new View.OnClickListener() {
+
+        }
+
+
+        public void bind(final Track track) {
+
+            ImageLoader.loadImage(mContext, track.getImage(), R.drawable.default_track, trackImageView);
+            nameTextView.setText(track.getName());
+            artistTextView.setText(track.getArtist().getName());
+            playCountTextView.setText(track.getPlaycount());
+            durationTextView.setText(DurationConverter.getDurationInMinutesText(Long.parseLong(track.getDuration())));
+
+            itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-
+                    listener.onClick(track);
                 }
             });
-
         }
 
     }
