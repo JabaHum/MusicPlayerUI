@@ -17,9 +17,6 @@ import id.ac.polinema.musicplayer.common.ImageLoader;
 import id.ac.polinema.musicplayer.models.Album;
 
 
-/**
- * Created by Bassem Samy on 6/17/2017.
- */
 
 public class TopAlbumsAdapter extends RecyclerView.Adapter<TopAlbumsAdapter.ViewHolder> {
     List<Album> mDataset;

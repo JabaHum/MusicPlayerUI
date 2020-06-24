@@ -44,45 +44,23 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
         setContentView(R.layout.song_list);
 
         mTabLayout = findViewById(R.id.tl_main);
+        mViewPager = findViewById(R.id.vp_main);
+        //mSwipeRefreshLayout
+        //mRecyclerview = findViewById(R.id.)
 
 
-        mSongsAdapter = new SongsAdapter(this);
+        //mSongsAdapter = new SongsAdapter(this);
 
-        mRecyclerview.setHasFixedSize(false);
+        /*mRecyclerview.setHasFixedSize(false);
         mRecyclerview.setLayoutManager(new LinearLayoutManager(MainActivity.this,RecyclerView.VERTICAL,false));
-        mRecyclerview.setAdapter(mSongsAdapter);
+        mRecyclerview.setAdapter(mSongsAdapter);*/
 
         initializeFragments();
-        fetchData();
+        //fetchData();
 
     }
 
-    private void fetchData() {
-        viewModel = new ViewModelProvider(MainActivity.this).get(TopTracksViewModel.class);
-        viewModel.init();
-        viewModel.getTopTracksRepository().observe(this, new Observer<Resource<MainModel>>() {
-            @Override
-            public void onChanged(Resource<MainModel> mainModelResource) {
-                if (mainModelResource !=null){
-                    switch (mainModelResource.status){
-                        case ERROR:
-                            mSwipeRefreshLayout.setRefreshing(false);
-                            break;
-                        case LOADING:
-                            mSwipeRefreshLayout.setRefreshing(true);
-                            break;
-                        case SUCCESS:
-                            if (mainModelResource.data !=null){
-                                Timber.tag(TAG).d("mainModelResource%s", mainModelResource.data);
-                                mSongsAdapter.setDataList(mainModelResource.data.getTracks().getTrack());
-                                mSwipeRefreshLayout.setRefreshing(false);
-                            }
-                            break;
-                    }
-                }
-            }
-        });
-    }
+
 
 
     @Override

@@ -10,6 +10,7 @@ import android.widget.TextView;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import id.ac.polinema.musicplayer.R;
@@ -18,19 +19,13 @@ import id.ac.polinema.musicplayer.common.ImageLoader;
 import id.ac.polinema.musicplayer.models.Track;
 
 
-/**
- * Created by Bassem Samy on 6/17/2017.
- */
 
 public class TopTracksAdapter extends RecyclerView.Adapter<TopTracksAdapter.ViewHolder> {
-    List<Track> mDataset;
-    Context mContext;
-    View.OnClickListener mOnItemClickListener;
+    private List<Track> mDataset = new ArrayList<>();
+    private Context mContext;
 
-    public TopTracksAdapter(List<Track> items, Context context, View.OnClickListener onClickListener) {
-        this.mDataset = items;
+    public TopTracksAdapter( Context context) {
         this.mContext = context;
-        this.mOnItemClickListener = onClickListener;
     }
 
     @Override
@@ -90,12 +85,11 @@ public class TopTracksAdapter extends RecyclerView.Adapter<TopTracksAdapter.View
             playCountTextView = itemView.findViewById(R.id.txt_plays);
             artistTextView = itemView.findViewById(R.id.txt_track_artist);
             durationTextView = itemView.findViewById(R.id.txt_duration);
+            cardView= itemView.findViewById(R.id.cv_track_item);
             cardView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    if (mOnItemClickListener != null) {
-                        mOnItemClickListener.onClick(view);
-                    }
+
                 }
             });
 

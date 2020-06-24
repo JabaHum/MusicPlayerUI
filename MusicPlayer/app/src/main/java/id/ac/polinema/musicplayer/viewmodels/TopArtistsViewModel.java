@@ -21,7 +21,7 @@ public class TopArtistsViewModel extends ViewModel {
 
     }
 
-    public LiveData<Resource<ArtistMainModel>> getTopTracksRepository() {
+    public LiveData<Resource<ArtistMainModel>> getTopArtistsRepository() {
         return mutableLiveData;
     }
 }

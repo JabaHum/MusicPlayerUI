@@ -10,6 +10,7 @@ import android.widget.TextView;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import id.ac.polinema.musicplayer.R;
@@ -18,13 +19,10 @@ import id.ac.polinema.musicplayer.models.ArtistMainData;
 
 
 public class TopArtistsAdapter extends RecyclerView.Adapter<TopArtistsAdapter.ViewHolder> {
-    private List<ArtistMainData> mDataset;
-    private View.OnClickListener mOnClickListener;
+    private List<ArtistMainData> mDataset = new ArrayList<>();
     private Context mContext;
 
-    public TopArtistsAdapter(List<ArtistMainData> items, Context context, View.OnClickListener onItemClickListener) {
-        this.mDataset = items;
-        this.mOnClickListener = onItemClickListener;
+    public TopArtistsAdapter( Context context) {
         this.mContext = context;
     }
 
@@ -78,12 +76,11 @@ public class TopArtistsAdapter extends RecyclerView.Adapter<TopArtistsAdapter.Vi
             artistImageView = itemView.findViewById(R.id.img_artist);
             artistTextView = itemView.findViewById(R.id.txt_artist_name);
             numberOfPlaysTextView = itemView.findViewById(R.id.txt_plays);
+            cardView = itemView.findViewById(R.id.cv_artist_item);
             cardView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    if (mOnClickListener != null) {
-                        mOnClickListener.onClick(view);
-                    }
+
                 }
             });
         }

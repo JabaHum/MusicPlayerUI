@@ -6,7 +6,6 @@ import androidx.lifecycle.MediatorLiveData;
 import androidx.lifecycle.Observer;
 
 import id.ac.polinema.musicplayer.common.Config;
-import id.ac.polinema.musicplayer.models.Artist;
 import id.ac.polinema.musicplayer.models.ArtistMainModel;
 import id.ac.polinema.musicplayer.models.Resource;
 import id.ac.polinema.musicplayer.network.APIClient;
