@@ -36,7 +36,6 @@ public class TopArtistsAdapter extends RecyclerView.Adapter<TopArtistsAdapter.Vi
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-
         ((ViewHolder) holder).bind(mDataset.get(position));
 
     }

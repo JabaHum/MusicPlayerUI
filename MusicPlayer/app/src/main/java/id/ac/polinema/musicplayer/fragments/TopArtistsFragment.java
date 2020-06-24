@@ -34,6 +34,7 @@ public class TopArtistsFragment extends Fragment implements OnArtistItemClickLis
     private ProgressBar mainprogressBar;
     private RecyclerView mRecyclerview;
     private TopArtistsAdapter mTopArtistsAdapter;
+    View emptyLayout;
 
 
     public TopArtistsFragment() {
@@ -54,6 +55,7 @@ public class TopArtistsFragment extends Fragment implements OnArtistItemClickLis
         super.onViewCreated(view, savedInstanceState);
         mainprogressBar = view.findViewById(R.id.prgrs_main);
         mRecyclerview = view.findViewById(R.id.rclr_artists);
+        emptyLayout = view.findViewById(R.id.empty_layout);
         initRecyclerView();
         fetchArtistData();
     }
@@ -83,8 +85,12 @@ public class TopArtistsFragment extends Fragment implements OnArtistItemClickLis
                             break;
                         case SUCCESS:
                             if (artistMainModelResource.data != null) {
+                                if (artistMainModelResource.data.getArtists().getArtist().size()==0){
+                                    emptyLayout.setVisibility(View.VISIBLE);
+                                }
                                 mTopArtistsAdapter.setDataset(artistMainModelResource.data.getArtists().getArtist());
                                 mainprogressBar.setVisibility(View.GONE);
+                                emptyLayout.setVisibility(View.GONE);
 
                             }
                             break;

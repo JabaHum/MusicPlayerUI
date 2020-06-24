@@ -31,6 +31,7 @@ public class TopTracksFragment extends Fragment implements OnTrackItemClickListe
     private ProgressBar mainprogressBar;
     private RecyclerView mRecyclerview;
     private TopTracksAdapter mTracksAdapater;
+    View emptyLayout;
 
     public TopTracksFragment() {
     }
@@ -50,6 +51,7 @@ public class TopTracksFragment extends Fragment implements OnTrackItemClickListe
         super.onViewCreated(view, savedInstanceState);
         mainprogressBar = view.findViewById(R.id.prgrs_main);
         mRecyclerview = view.findViewById(R.id.rclr_tracks);
+        emptyLayout = view.findViewById(R.id.empty_layout);
         initRecyclerView();
         fetchTracksData();
     }
@@ -79,8 +81,12 @@ public class TopTracksFragment extends Fragment implements OnTrackItemClickListe
                             break;
                         case SUCCESS:
                             if (mainModelResource.data != null) {
+                                if (mainModelResource.data.getTracks().getTrack().size() == 0) {
+                                    emptyLayout.setVisibility(View.VISIBLE);
+                                }
                                 mTracksAdapater.setDataset(mainModelResource.data.getTracks().getTrack());
                                 mainprogressBar.setVisibility(View.GONE);
+                                emptyLayout.setVisibility(View.GONE);
 
                             }
                             break;
