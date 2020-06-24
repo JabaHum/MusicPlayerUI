@@ -6,7 +6,6 @@ import androidx.lifecycle.ViewModel;
 
 import id.ac.polinema.musicplayer.models.MainModel;
 import id.ac.polinema.musicplayer.models.Resource;
-import id.ac.polinema.musicplayer.models.TopTracksData;
 import id.ac.polinema.musicplayer.repositories.TopTracksRepository;
 
 public class TopTracksViewModel extends ViewModel {
