@@ -19,14 +19,11 @@ import id.ac.polinema.musicplayer.models.Album;
 
 
 public class TopAlbumsAdapter extends RecyclerView.Adapter<TopAlbumsAdapter.ViewHolder> {
-    List<Album> mDataset;
-    Context mContext;
-    View.OnClickListener mOnItemClickListener;
+    private List<Album> mDataset;
+    private Context mContext;
 
-    public TopAlbumsAdapter(List<Album> items, Context context, View.OnClickListener onClickListener) {
-        this.mDataset = items;
+    public TopAlbumsAdapter( Context context) {
         this.mContext = context;
-        this.mOnItemClickListener = onClickListener;
     }
 
     @Override
@@ -86,9 +83,7 @@ public class TopAlbumsAdapter extends RecyclerView.Adapter<TopAlbumsAdapter.View
             cardView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    if (mOnItemClickListener != null) {
-                        mOnItemClickListener.onClick(view);
-                    }
+
                 }
             });
         }
