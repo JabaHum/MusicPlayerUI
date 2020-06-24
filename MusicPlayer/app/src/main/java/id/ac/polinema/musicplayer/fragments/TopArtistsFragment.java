@@ -34,7 +34,7 @@ public class TopArtistsFragment extends Fragment implements OnArtistItemClickLis
     private ProgressBar mainprogressBar;
     private RecyclerView mRecyclerview;
     private TopArtistsAdapter mTopArtistsAdapter;
-    View emptyLayout;
+    private View emptyLayout;
 
 
     public TopArtistsFragment() {
@@ -62,7 +62,6 @@ public class TopArtistsFragment extends Fragment implements OnArtistItemClickLis
 
     private void initRecyclerView() {
         mTopArtistsAdapter = new TopArtistsAdapter(getContext(), this);
-
         mRecyclerview.setHasFixedSize(false);
         mRecyclerview.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.VERTICAL,false));
         mRecyclerview.setAdapter(mTopArtistsAdapter);
@@ -101,7 +100,7 @@ public class TopArtistsFragment extends Fragment implements OnArtistItemClickLis
     }
 
 
-    void openUrl(String url) {
+    private void openUrl(String url) {
         if (!TextUtils.isEmpty(url)) {
             Intent intent = new Intent();
             intent.setAction(Intent.ACTION_VIEW);

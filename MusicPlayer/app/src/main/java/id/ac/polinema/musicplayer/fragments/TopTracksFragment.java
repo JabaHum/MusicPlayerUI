@@ -97,7 +97,7 @@ public class TopTracksFragment extends Fragment implements OnTrackItemClickListe
     }
 
 
-    void openUrl(String url) {
+    private void openUrl(String url) {
         if (!TextUtils.isEmpty(url)) {
             Intent intent = new Intent();
             intent.setAction(Intent.ACTION_VIEW);
